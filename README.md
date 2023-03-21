@@ -9,7 +9,7 @@ If you and your institution are interested in joining the adventure, download an
 
 #### How the application process functions: 
 
-
+<img src="images/PS_onboarding-process-illustration.png" alt="Onboarding Illustration" title="Onboarding Illustration" width=768>
 
 1. Complete and return the form signed by all parties via IncaMail to ssi-sandbox@bit.admin.ch  
 *You will need various technical information such as: Issuer and Owner identificators (DID) and public keys (verkey)*
