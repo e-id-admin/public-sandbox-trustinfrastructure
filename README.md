@@ -26,7 +26,7 @@ If you and your institution are interested in joining the adventure, download an
 - - - -
 
 ## Ground rules
-You will find everything about the participation and data management rules in the [fact sheet](./technical_integrator_factsheet.md) and in the application form. Main rules are:
+You will find everything about the participation and data management rules in the fact sheet and in the application form. Main rules are:
 
 * the responsibility for the data is imputed to the participants 
 * every actively* involved party in a participant's business case must read the conditions and co-sign the form with full knowledge  
