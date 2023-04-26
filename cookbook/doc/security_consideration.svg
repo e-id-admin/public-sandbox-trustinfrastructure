@@ -1,0 +1,25 @@
+<svg fill="none" viewBox="0 0 740 300" width="740" height="300" xmlns="http://www.w3.org/2000/svg">
+    <foreignObject width="100%" height="100%">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+            <style>
+                /* The alert message box */
+                .alert {
+                font: 15px Helvetica, arial, freesans, clean, sans-serif;
+                padding: 20px;
+                background-color: #f44336; /* Red */
+                color: white;
+                margin-bottom: 15px;
+                }
+            </style>
+            <div class="alert">
+                <h3>Security considerations</h3>
+                The main purpose of the information provided in this document is to get you up and running and connected to the Public Sandbox Trust Infrastructure.
+                Please be aware that exposing containers deployed using the provided Docker Compose file directly to the internet poses a serious security risk. Before using the provided Docker Compose file, minimally ensure that:
+                <ul class="alert">
+                    <li>The exemplary user accounts, passwords and API keys have been changed (basically erveything starting with "unsecure" in the Docker Compose file)</li>
+                    <li>The admin API endpoint is protected to only allow access from trusted sources (port 8000, according to the initial settings)</li>
+                </ul>
+            </div>
+        </div>
+    </foreignObject>
+</svg>

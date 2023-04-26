@@ -1,0 +1,61 @@
+version: "3.4"
+services:
+  db:
+    image: postgres:13.9-alpine
+    #restart: always
+    environment:
+      - POSTGRES_USER=unsecuredUserForTestingPurposesOnly
+      - POSTGRES_PASSWORD=unsecurePasswordForTestingPurposesOnly
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U unsecuredUserForTestingPurposesOnly"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - '5432:5432'
+  issuer:
+    image: bcgovimages/aries-cloudagent:py36-1.16-1_0.8.1
+    command:
+      - start
+      - '--inbound-transport'
+      - http
+      - 0.0.0.0
+      - '8002'
+      - '--admin'
+      - 0.0.0.0
+      - '8000'
+    ports:
+      - "8002:8002"
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      # The configuration of the following arguments are described in the README.md:
+      # ACAPY_NO_LEDGER -> If false, the did provided via the ACAPY_WALLET_SEED allready has to be registered on the ledger
+      # ACAPY_WALLET_SEED -> Seed for the initial did configured in the agents wallet
+      # ACAPY_GENESIS_URL -> If set, the agent tries to connect to it. ACAPY_NO_LEDGER is in this case not set
+      #- ACAPY_WALLET_SEED=<your seed>
+      #- ACAPY_NO_LEDGER=True
+      - ACAPY_GENESIS_URL=https://raw.githubusercontent.com/e-id-admin/public-sandbox-trustinfrastructure/main/pool_genesis
+      - ACAPY_AUTO_PROVISION=True
+      - ACAPY_RECREATE_WALLET=True
+      - ACAPY_ENDPOINT=http://issuer:8002
+      - ACAPY_OUTBOUND_TRANSPORT=http
+      - ACAPY_WALLET_TYPE=askar
+      - ACAPY_WALLET_NAME=issuer
+      - ACAPY_WALLET_STORAGE_TYPE=postgres
+      - ACAPY_WALLET_STORAGE_CONFIG={"url":"db:5432","wallet_scheme":"public"}
+      - ACAPY_WALLET_STORAGE_CREDS={"account":"unsecuredUserForTestingPurposesOnly","password":"unsecurePasswordForTestingPurposesOnly","admin_account":"unsecuredUserForTestingPurposesOnly","admin_password":"unsecurePasswordForTestingPurposesOnly"}
+      - ACAPY_WALLET_KEY=unsecurePasswordForTestingPurposesOnly
+      - ACAPY_ADMIN_API_KEY=unsecurePasswordForTestingPurposesOnly
+      - ACAPY_ENDORSER_ROLE=author
+      - ACAPY_ENDORSER_ALIAS=foittendorser
+      - ACAPY_CREATE_REVOCATION_TRANSACTIONS=true
+      - ACAPY_AUTO_REQUEST_ENDORSEMENT=true
+      - ACAPY_AUTO_WRITE_TRANSACTIONS=true
+      - ACAPY_AUTO_VERIFY_PRESENTATION=true
+      - ACAPY_AUTO_PING_CONNECTION=true
