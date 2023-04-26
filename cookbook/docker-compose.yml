@@ -53,7 +53,7 @@ services:
       - ACAPY_WALLET_KEY=unsecurePasswordForTestingPurposesOnly
       - ACAPY_ADMIN_API_KEY=unsecurePasswordForTestingPurposesOnly
       - ACAPY_ENDORSER_ROLE=author
-      - ACAPY_ENDORSER_ALIAS=${ENDORSER_ALIAS}
+      - ACAPY_ENDORSER_ALIAS=foittendorser
       - ACAPY_CREATE_REVOCATION_TRANSACTIONS=true
       - ACAPY_AUTO_REQUEST_ENDORSEMENT=true
       - ACAPY_AUTO_WRITE_TRANSACTIONS=true
