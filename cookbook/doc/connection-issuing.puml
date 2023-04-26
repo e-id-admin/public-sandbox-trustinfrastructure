@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Issuer -> Issuer: POST /schemas
+Issuer -> Issuer: POST /credential-definitions
+Issuer -> Issuer: POST /connections/create-invitation
+Issuer --> Holder: Out-of-band transmission of invite (e.g. qr-code, link)
+Holder -> Holder: POST /connections/receive-invitation
+Holder <--> Issuer: Various requests (Automatic connection establishing)
+Issuer --> Holder: POST /issue-credential-2.0/send
+
+@enduml

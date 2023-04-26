@@ -1,0 +1,17 @@
+@startuml
+
+database "PostgresDB" {
+}
+
+note right of "PostgresDB"
+    Contains the "wallet"
+    of the agent
+end note
+
+[Issuer Agent] ..> "PostgresDB" : use
+interface "Admin API :8000" as swagger
+interface "ACA-Py :8002" as agent
+[Issuer Agent] -right- swagger
+[Issuer Agent] -left- agent
+
+@enduml
