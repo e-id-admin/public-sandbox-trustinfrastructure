@@ -79,12 +79,27 @@ Because you don't set the seed, the environment variables don't need to be touch
 </details>
 
 
-Start the agent
+Start the agent and wait until the startup sequence completed
 ```bash
 docker compose up
 ```
-#### 2. Generate did
-Once the agent is started, send the following request to the wallet endpoint
+
+If you're planning on using Postman to interact with the ACA-Py Admin API REST endpoints, now would be a good time to set it up.
+ 
+<details>
+<summary>Recommended Postman setup</summary>
+
+You can import the different endpoints of the agent by using the published swagger-doc that the agent provides. Make sure the settings (baseUrl and apiKey) match the configuration of the Docker Compose file if you followed the recommendation to adjust the security related settings.
+
+<img src="doc/postman_swagger-import.png" width="870">
+
+<img src="doc/postman_env-variable.png" width="870">
+
+<img src="doc/postman_api-key.png" width="870">
+</details>
+
+#### 2. Generate DID
+Once the agent is started, send the following request to the wallet endpoint (e.g. Endpoint http://0.0.0.0:8000/wallet/did/create)
 
 POST /wallet/did/create
 ```json
@@ -166,18 +181,6 @@ ssi_issuing-cookbook-issuer-1  |
 ssi_issuing-cookbook-issuer-1  | Listening...
 ssi_issuing-cookbook-issuer-1  | 
 ```
-
-<details>
-<summary>Import Swagger Endpoints in Postman - Set Api Key</summary>
-
-If you're using Postman you can import the different endpoints of the agent by using the published swagger-doc
-
-<img src="doc/postman_swagger-import.png" width="870">
-
-<img src="doc/postman_env-variable.png" width="870">
-
-<img src="doc/postman_api-key.png" width="870">
-</details>
 
 #### 3. List local DID
 
