@@ -61,7 +61,7 @@ We strongly advice you to build and deploy your own images to be able to impleme
 ## Before [applying](https://github.com/e-id-admin/public-sandbox-trustinfrastructure#how-to-apply-to-the-sandbox)
 
 ### Generate DID without providing a seed
-This variant explains how to generate a decentralized identifier (DID) in an stable environment - here you can be sure that your database is stable. This is important because you won't be able to see the seed after you created the DID. This means: When you lose your wallet/database you won't be able to use the DID anymore, unless you have a backup at hand.
+This variant explains how to generate a decentralized identifier (DID) in an stable environment where you must ensure that the data isn't volatile. This is important because you won't be able to see the seed after you created the DID. This means: When you lose your wallet/database you won't be able to use the DID anymore, unless you have a backup at hand.
 
 #### 1. Start issuer
 Because you don't set the seed, the environment variables don't need to be touched.
