@@ -86,7 +86,7 @@ docker compose up
 #### 2. Generate did
 Once the agent is started, send the following request to the wallet endpoint
 
-POST /wallet/did.
+POST /wallet/did/create
 ```json
 {
   "method": "sov",
