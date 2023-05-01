@@ -17,7 +17,7 @@ If you and your institution are interested in joining the adventure, download an
 <img src="images/PS_onboarding-process-illustration.jpg" alt="Onboarding Illustration" title="Onboarding Illustration" width=768>
 
 1. Complete and return the form signed by all parties via [IncaMail](https://www.incamail.com/) to ssi-sandbox@bit.admin.ch  
-*You will need various technical information such as: Issuer and Owner identificators (DID) and public keys (verkey)*
+*You will need various technical information such as: Issuer and Owner identificators (Indy DID) and public keys (verkey)*
 3. Wait  
 *You will receive an application confirmation*
 5. Access to the base registry thanks to the received agent invitation
