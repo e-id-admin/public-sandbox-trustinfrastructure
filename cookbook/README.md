@@ -430,6 +430,15 @@ POST /schemas
 ......
 ```
 
+<details>
+<summary>Getting all your schemas</summary>
+You can get all your schemas and their schema_id with 
+
+GET /schemas/created?schema_issuer_did=:schema_issuer_did
+
+where schema_issuer_did is your DID.
+</details>
+
 ### 2. Create a credential definition
 
 As with pervious instances, replace the :conn_id with your connection id
@@ -486,50 +495,42 @@ POST /connections/create-invitation?auto_accept=true&alias=myConnection
 
 You can generate a QR-Code from the invitation_url for the wallet to scan.
 
+You want to save the connection_id for issuing the credentials.
+
 ### 4. & 5. Out of Band Transmission
 For the next step the QR-Code will be scanned and accepted. This requires no calls from Postman.
 
 ### 6. Issue and send a credential
+To issue the credentials the [connection_id](#3-create-an-invitation) and [schema_id](#1-create-a-schema) must be known and the attributes set according to the schema.
 
-POST /issue-credential-2.0/send
+POST /issue-credential/send
 
 *Body*
 ```json
 {
   "connection_id": "afb49d06-4bff-453b-a64f-48cb51b9fb04",
-  "filter": {
-    "indy": {
-      "cred_def_id": "Bo4wiuWLuHQoHcqwJrgKZt:3:CL:20:1.0",
-      "issuer_did": "Bo4wiuWLuHQoHcqwJrgKZt",
-      "schema_id": "Bo4wiuWLuHQoHcqwJrgKZt:2:MySpecialId:1.0",
-      "schema_issuer_did": "Bo4wiuWLuHQoHcqwJrgKZt",
-      "schema_name": "MySpecialId",
-      "schema_version": "1.0"
-    }
-  },
-  "auto_remove": true,
-  "comment": "Test credential for tutorial",
-  "credential_preview": {
-    "attributes": [
-      {
-        "name": "firstName",
-        "value": "Jon",
-        "mime-type": "text/plain"
+  "credential_proposal": {
+      "attributes": [
+          {
+              "name": "firstName",
+              "value": "Jon",
+              "mime-type": "text/plain"
+          },
+          {
+              "name": "lastName",
+              "value": "Doe",
+              "mime-type": "text/plain"
+          },
+          {
+              "name": "birthdate",
+              "value": "01.01.2000",
+              "mime-type": "text/plain"
+          }
+          ],
+          "@type": "issue-credential/credential-preview"
       },
-      {
-        "name": "lastName",
-        "value": "Doe",
-        "mime-type": "text/plain"
-      },
-      {
-        "name": "birthdate",
-        "value": "01.01.2000",
-        "mime-type": "text/plain"
-      }
-    ],
-    "@type": "issue-credential/2.0/credential-preview"
-  },
-  "trace": true
+    "auto_remove": "true",
+    "schema_id": "Bo4wiuWLuHQoHcqwJrgKZt:2:MySpecialId:1.0"
 }
 ```
 
