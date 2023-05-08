@@ -103,7 +103,7 @@ Note: When using Docker with WSL, your base URL for a local setup will only be a
 #### 2. Generate DID
 Once the agent is started, send the following request to the wallet endpoint (e.g. Endpoint http://0.0.0.0:8000/wallet/did/create)
 
-POST /wallet/did/create
+`POST /wallet/did/create`
 ```json
 {
   "method": "sov",
@@ -247,9 +247,13 @@ If you used a seed to generate the keys, you can generate the exact same key mat
 
 </details>
 
-Accept the invitation by sending the mail content to the invitation endpoint
+Accept the invitation by sending the mail content to the invitation endpoint.
 
-POST /connections/receive-invitation?alias=foittendorser&auto_accept=true
+> Params
+> * `alias` the value of the environment variable set in ACAPY_ENDORSER_ALIAS
+> * `auto_accept` true
+
+`POST /connections/receive-invitation`?alias=foittendorser&auto_accept=true
 
 *Request*
 ```json
@@ -285,6 +289,7 @@ POST /connections/receive-invitation?alias=foittendorser&auto_accept=true
   ]
 }
 ```
+This connection is between the public sandbox endorser and your ACA-py.
 
  ### 3. Specify the endorsing connection
 
@@ -293,7 +298,10 @@ To make the issuer-agent aware, that it should send the transaction to endorser,
 **Set endorser role**
 > **:conn_id** needs to be replaced with the 'connection_id' of the previous response
 
-POST /transactions/:conn_id/set-endorser-role?transaction_my_job=TRANSACTION_AUTHOR
+> Params
+> * `transaction_my_job` must be set to TRANSACTION_AUTHOR
+
+`POST /transactions/:conn_id/set-endorser-role`?transaction_my_job=TRANSACTION_AUTHOR
 
 *Response*
 ```json
@@ -303,11 +311,16 @@ POST /transactions/:conn_id/set-endorser-role?transaction_my_job=TRANSACTION_AUT
 ```
 
 **Set endorser info**
-> **:conn_id** needs to be replaced with the 'connection_id' of the previous response
+> **:conn_id** needs to be replaced with the 'connection_id' of the [previous response](#2-Accept-the-invitation)
 
-> The  **endorser did** is already put in the request url and is *8WzWX4G3Rti6tVSX3Atcvo*
+> Params
+> * `endorser_did` is the DID of the public sandbox endorser, which is **8WzWX4G3Rti6tVSX3Atcvo**
+> * `endorser_name` must match the value of ACAPY_ENDORSER_ALIAS environment variable set in the docker compose file.
 
-POST /transactions/:conn_id/set-endorser-info?endorser_did=8WzWX4G3Rti6tVSX3Atcvo&endorser_name=foittendorser
+> The  **endorser did** is already put in the request url and is **8WzWX4G3Rti6tVSX3Atcvo**
+
+
+`POST /transactions/:conn_id/set-endorser-info`?endorser_did=8WzWX4G3Rti6tVSX3Atcvo&endorser_name=foittendorser
 
 *Response*
 ```json
@@ -320,17 +333,18 @@ POST /transactions/:conn_id/set-endorser-info?endorser_did=8WzWX4G3Rti6tVSX3Atcv
 ### 4. Set public DID
 To make the wallet aware which DID should be used, the DID on the ledger must be set to public.
 
-* :did must be replaced with the DID registered on the sandbox ledger
-* :conn_id must be replaced with the connection_id, as in the previous step
+> Params
+> * `did` must be replaced with the DID registered on the sandbox ledger
+> * `conn_id` must be replaced with the connection_id as before between [this agent and the public sandbox endorser](#2-Accept-the-invitation)
+> * `create_transaction_for_endorser` must be set to true
 
-
-POST /wallet/did/public
+`POST /wallet/did/public`
 
 You will get a large response. Reading back with
 
-GET /wallet/did/public
+`GET /wallet/did/public`
 
-Will return your did & verkey
+Will return your now public did & verkey
 
 ```json
     "result": {
@@ -385,7 +399,10 @@ Insert the attributes required for your credential and send the request. By doin
 > **Change schema name**  
 > In this example the name of the schema with this request will be "MySpecialId". Because we prohibit the reuse of an already existing schema name, please replace the value of the attribute "schema_name" with another unique value 
 
-POST /schemas
+>Params
+> * `conn_id` must be the id of the connection between your agent and the endorser [the response from accepting the invitation](#2-Accept-the-invitation)
+
+`POST /schemas`
 ```json
 {
   "attributes": [
@@ -440,12 +457,12 @@ where schema_issuer_did is your DID.
 </details>
 
 ### 2. Create a credential definition
-
-As with pervious instances, replace the :conn_id with your connection id
+> Params
+> * `conn_id` the [id for the connection](#2-Accept-the-invitation) between your agent and the public sandbox endorser
 
 Copy the value of the attribute "schema_id" from the previous response and use it in the body of the new request.
 
-POST /credential-definitions
+`POST /credential-definitions`
 
 ```json
 {
@@ -472,8 +489,11 @@ To send a credential to a holder, a channel / connection needs to be setup betwe
 At this point you need a different/receiving agent which is going to accept the invitation.
 
 Note: It is optional to provide a request body in this call. For the simple example here in the cookbook no request body is required.
+> Params
+> * `auto_accept` must be true
+> * `alias` is the name for your invitation, eg: myConnection
 
-POST /connections/create-invitation?auto_accept=true&alias=myConnection
+`POST /connections/create-invitation`
 
 *Response*
 ```json
@@ -503,7 +523,7 @@ For the next step the QR-Code will be scanned and accepted. This requires no cal
 ### 6. Issue and send a credential
 To issue the credentials the [connection_id](#3-create-an-invitation) and [schema_id](#1-create-a-schema) must be known and the attributes set according to the schema.
 
-POST /issue-credential/send
+`POST /issue-credential/send`
 
 *Body*
 ```json
@@ -527,7 +547,7 @@ POST /issue-credential/send
               "mime-type": "text/plain"
           }
           ],
-          "@type": "issue-credential/credential-preview"
+          "@type": "issue-credential/1.0/credential-preview"
       },
     "auto_remove": "true",
     "schema_id": "Bo4wiuWLuHQoHcqwJrgKZt:2:MySpecialId:1.0"
