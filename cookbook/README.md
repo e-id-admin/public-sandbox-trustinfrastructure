@@ -17,7 +17,7 @@ This documentation will show you how to create a DID and connect your issuing ag
   * [Before applying](#before-applying)
     * [Generate DID without providing a seed](#generate-did-without-providing-a-seed)
       * [1. Start issuer](#1-start-issuer)
-      * [2. Generate did](#2-generate-did)
+      * [2. Generate DID](#2-generate-did)
     * [Alternative variant: Generate DID by providing a seed](#alternative-variant-generate-did-by-providing-a-seed)
       * [1. Generate seed](#1-generate-seed)
       * [2. Generate DID (by providing seed)](#2-generate-did-by-providing-seed)
@@ -53,7 +53,7 @@ The credentials used in this example are for demonstration purpose only. For you
 - [Postman](https://www.postman.com/) or another REST-Client
 
 **Additional requirement for the stable environment**
-- Public reachable agent 
+- Public reachable agent (which runs at least on the [aries-cloudagent 0.8.0](https://hub.docker.com/layers/bcgovimages/aries-cloudagent/py36-1.16-1_0.8.0/images/sha256-23f8205a0e839e95eda277a9f3b2c0538d1f69871f32743f87d5cb0378a9ad4f?context=explore) version)
 - Independent PostgreSQL database (to assure that the wallet persists even when the agent should be destroyed)
 
 We strongly advice you to build and deploy your own images to be able to implement the necessary level of security that is needed for your use case.
@@ -290,6 +290,8 @@ POST /transactions/:conn_id/set-endorser-role?transaction_my_job=TRANSACTION_AUT
 
 **Set endorser info**
 > **:conn_id** needs to be replaced with the 'connection_id' of the previous response
+
+> The  **endorser did** is already put in the request url and is *8WzWX4G3Rti6tVSX3Atcvo*
 
 POST /transactions/:conn_id/set-endorser-info?endorser_did=8WzWX4G3Rti6tVSX3Atcvo&endorser_name=foittendorser
 

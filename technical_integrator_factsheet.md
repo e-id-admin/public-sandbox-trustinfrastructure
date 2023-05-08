@@ -49,6 +49,9 @@ We do call those partitions "business cases" and may refer to them as such in th
 
 ### 1.4. Out of scope
 
+> **New to the technology?**   
+> If SSI is new to you the technology feel free to consult our detailed [sandbox cookbook](cookbook/README.md), which explains to you how to go to the onboarding process from a technical point-of-view
+
 This document does not cover the following topics:
 
 - Introduction to SSI concepts
@@ -100,6 +103,9 @@ or copied here:
 ```
 
 #### 2.2.2. Policy Enforcement
+
+> The  **endorser did** of the agent which the policy enforcement point uses is *8WzWX4G3Rti6tVSX3Atcvo*  
+> How to use it is explained in the [sandbox cookbook](cookbook/README.md), which explains to you how credentials issuing works
 
 To govern the public data written to the base registry all (ledger-) transactions need to be reviewed by our policy enforcement point.
 Currently this consist of an acapy endorser system, an agent invitation to create a connection with this system will be sent to you after your access to the sandbox has been granted.
