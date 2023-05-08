@@ -91,6 +91,8 @@ If you're planning on using Postman to interact with the ACA-Py Admin API REST e
 
 You can import the different endpoints of the agent by using the published swagger-doc that the agent provides. Make sure the settings (baseUrl and apiKey) match the configuration of the Docker Compose file if you followed the recommendation to adjust the security related settings.
 
+Note: When using Docker with WSL, your base URL for a local setup will only be accessible under http://127.0.0.1:8000/ instead of http://0.0.0.0:8000
+
 <img src="doc/postman_swagger-import.png" width="870">
 
 <img src="doc/postman_env-variable.png" width="870">
@@ -132,7 +134,7 @@ Alternative variant: Generate DID by providing a seed
 ### Alternative variant: Generate DID by providing a seed
 This variant explains how to generate a decentralized identifier (DID) by specifying the seed. This is especially useful, when you generate the DID in a non-stable environment, like on your local machine.
 #### 1. Generate seed
-To generate a DID, a seed (string consisting of  32 charachters) is needed which serves as cryptographical proof that you're in possession of the DID. If you don't have a seed available, you can generate one on your own by executing the following script
+To generate a DID, a seed (string consisting of 32 characters) is needed which serves as cryptographical proof that you're in possession of the DID. If you don't have a seed available, you can generate one on your own by executing the following script
 ```bash
 bash generate-seed.sh
 ```
@@ -230,8 +232,20 @@ After you applied successfully you should have received an e-mail with an invita
 }
 ```
 
+You will also be able to see your DID and Verkey on the Sandbox Ledger under https://explorer.sandbox.ssi.ch/
+
 ### 2. Accept the invitation
 > The following steps should be performed in a stable-environment
+<details>
+
+<summary>More to the stable environment</summary>
+Your stable environment must have ACA-py accessible from the internet. This must be configured in the environment variable ACAPY_ENDPOINT.
+
+If you generated your DID & Verkey in an unstable environment you will have to migrate it to your stable environment. The key material is saved in your wallet in the postgres database.
+
+If you used a seed to generate the keys, you can generate the exact same key material again as described above.
+
+</details>
 
 Accept the invitation by sending the mail content to the invitation endpoint
 
@@ -303,6 +317,33 @@ POST /transactions/:conn_id/set-endorser-info?endorser_did=8WzWX4G3Rti6tVSX3Atcv
 }
 ```
 
+### 4. Set public DID
+To make the wallet aware which DID should be used, the DID on the ledger must be set to public.
+
+* :did must be replaced with the DID registered on the sandbox ledger
+* :conn_id must be replaced with the connection_id, as in the previous step
+
+
+POST /wallet/did/public
+
+You will get a large response. Reading back with
+
+GET /wallet/did/public
+
+Will return your did & verkey
+
+```json
+    "result": {
+        "did": "DnqWntWkRLBJrxET1JFypP",
+        "verkey": "7yKuvFRr1CJU2qFY3iSiktDTL6Fw3fe8xyXjPR3jSXNk",
+        "posture": "posted",
+        "key_type": "ed25519",
+        "method": "sov"
+    }
+```
+
+
+
 ## Issue a credential
 
 > **Before you continue**  
@@ -322,7 +363,7 @@ Now that your issuer is connected to the endorser of the FOITT, you're able to m
 
 ![diagramm_connection-issuing.png](doc%2Fdiagramm_connection-issuing.png)
 
-1. [Create a schema whith the attributes you want to have in the credentials](#1-create-a-schema)
+1. [Create a schema with the attributes you want to have in the credentials](#1-create-a-schema)
 2. [Create a credential definition (a unique instance of that schema which is used for issuing credentials)](#2-create-a-credential-definition)
 3. [Create an invitation for one or more holders](#3-create-an-invitation)
 4. Transmit the invitation to the holder. This could be achieved by scanning a qr-code, calling the link etc. 
@@ -336,7 +377,7 @@ The flow to issue a credential varies depending on your use-case. In the followi
 
 ![aries-issuing-flow.png](doc%2Faries-issuing-flow.png)
 
-Source [0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree/bb42a6c35e0d5543718fb36dd099551ab192f7b0/features/0036-issue-credential#messages)
+Source [aries-rfcs/0036-issue-credential](https://github.com/hyperledger/aries-rfcs/tree/bb42a6c35e0d5543718fb36dd099551ab192f7b0/features/0036-issue-credential#messages)
 
 ### 1. Create a schema
 Insert the attributes required for your credential and send the request. By doing so, a transaction will be sent to the endorser which checks if you're allowed to send transaction to the ledger
@@ -390,7 +431,13 @@ POST /schemas
 ```
 
 ### 2. Create a credential definition
-Copy the value of the attribute "schema_id" and use it in the new request 
+
+As with pervious instances, replace the :conn_id with your connection id
+
+Copy the value of the attribute "schema_id" from the previous response and use it in the body of the new request.
+
+POST /credential-definitions
+
 ```json
 {
   "schema_id": "FGn2c4rWJbXZ8AbCpEyr2u:2:MySpecialId:1.0",
@@ -404,15 +451,18 @@ Copy the value of the attribute "schema_id" and use it in the new request
     "sent": {
         "credential_definition_id": "Bo4wiuWLuHQoHcqwJrgKZt:3:CL:20:1.0"
     },
-    "credential_definition_id": "Bo4wiuWLuHQoHcqwJrgKZt:3:CL:20:1.0"
+    "txn": {...
+    }
 }
 ```
 ### 3. Create an invitation
 > **Who is going to accept the invitation?**   
 > If you're stumbling at this point, asking yourself who this "different agent" could be, then it might be helpful to look the courses mentioned [at the beginning](#how-to-use-the-public-sandbox-with-your-own-agent) or setup locally [one of the demo use-cases (with alice, bob, faber college)](https://github.com/hyperledger/aries-cloudagent-python/blob/main/docs/GettingStartedAriesDev/DecentralizedIdentityDemos.md) provided by hyperledger. These show how different agents interact with each-other by using a connection
  
-To send a credential to a holder, a channel / connection needs to be setup beween the agents upfront. This process is initiated by creating an invitation.
+To send a credential to a holder, a channel / connection needs to be setup between the agents upfront. This process is initiated by creating an invitation.
 At this point you need a different/receiving agent which is going to accept the invitation.
+
+Note: It is optional to provide a request body in this call. For the simple example here in the cookbook no request body is required.
 
 POST /connections/create-invitation?auto_accept=true&alias=myConnection
 
@@ -433,6 +483,12 @@ POST /connections/create-invitation?auto_accept=true&alias=myConnection
     "alias": "myConnection"
 }
 ```
+
+You can generate a QR-Code from the invitation_url for the wallet to scan.
+
+### 4. & 5. Out of Band Transmission
+For the next step the QR-Code will be scanned and accepted. This requires no calls from Postman.
+
 ### 6. Issue and send a credential
 
 POST /issue-credential-2.0/send
