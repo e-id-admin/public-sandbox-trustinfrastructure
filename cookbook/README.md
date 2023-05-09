@@ -251,7 +251,7 @@ Accept the invitation by sending the mail content to the invitation endpoint.
 
 > Params
 > * `alias` the value of the environment variable set in ACAPY_ENDORSER_ALIAS
-> * `auto_accept` true
+> * `auto_accept` true, to skip manual accepting of the connection request.
 
 `POST /connections/receive-invitation`?alias=foittendorser&auto_accept=true
 
@@ -335,8 +335,7 @@ To make the wallet aware which DID should be used, the DID on the ledger must be
 
 > Params
 > * `did` must be replaced with the DID registered on the sandbox ledger
-> * `conn_id` must be replaced with the connection_id as before between [this agent and the public sandbox endorser](#2-Accept-the-invitation)
-> * `create_transaction_for_endorser` must be set to true
+> * `conn_id` (optional when using [transaction](#3-specify-the-endorsing-connection)) would be the connection_id between [this agent and the public sandbox endorser](#2-Accept-the-invitation)
 
 `POST /wallet/did/public`
 
@@ -400,7 +399,7 @@ Insert the attributes required for your credential and send the request. By doin
 > In this example the name of the schema with this request will be "MySpecialId". Because we prohibit the reuse of an already existing schema name, please replace the value of the attribute "schema_name" with another unique value 
 
 >Params
-> * `conn_id` must be the id of the connection between your agent and the endorser [the response from accepting the invitation](#2-Accept-the-invitation)
+> * `conn_id` (optional when using [transaction](#3-specify-the-endorsing-connection)) connection_id between your agent and the endorser [the response from accepting the invitation](#2-Accept-the-invitation)
 
 `POST /schemas`
 ```json
@@ -515,7 +514,7 @@ Note: It is optional to provide a request body in this call. For the simple exam
 
 You can generate a QR-Code from the invitation_url for the wallet to scan.
 
-You want to save the connection_id for issuing the credentials.
+You want to save the connection_id for the connection between agent for issuing the credentials.
 
 ### 4. & 5. Out of Band Transmission
 For the next step the QR-Code will be scanned and accepted. This requires no calls from Postman.
