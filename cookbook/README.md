@@ -554,7 +554,7 @@ To issue the credentials the [connection_id](#3-create-an-invitation) and [schem
 ```
 
 ### What next?
-Congrats, you arrived at the end :-) ! Not only have you established an endorsing connection with the FOITT endorser, but as well set up your own agent with whom you can issue credentials from now on. For further information on the SSI topic, feel free to have look at the courses mentioned [at the beginning](#how-to-use-the-public-sandbox-with-your-own-agent)
+Congrats, you arrived at the end :-) ! Not only have you established an endorsing connection with the FOITT endorser, but as well set up your own agent with which you can issue credentials from now on. For further information on the SSI topic, feel free to have look at the courses mentioned [at the beginning](#how-to-use-the-public-sandbox-with-your-own-agent)
 
 **Troubles?**
 
