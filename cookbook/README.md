@@ -56,12 +56,12 @@ The credentials used in this example are for demonstration purpose only. For you
 - Public reachable agent (which runs at least on the [aries-cloudagent 0.8.0](https://hub.docker.com/layers/bcgovimages/aries-cloudagent/py36-1.16-1_0.8.0/images/sha256-23f8205a0e839e95eda277a9f3b2c0538d1f69871f32743f87d5cb0378a9ad4f?context=explore) version)
 - Independent PostgreSQL database (to assure that the wallet persists even when the agent should be destroyed)
 
-We strongly advice you to build and deploy your own images to be able to implement the necessary level of security that is needed for your use case.
+We strongly advise you to build and deploy your own images to be able to implement the necessary level of security that is needed for your use case.
 
 ## Before [applying](https://github.com/e-id-admin/public-sandbox-trustinfrastructure#how-to-apply-to-the-sandbox)
 
 ### Generate DID without providing a seed
-This variant explains how to generate a decentralized identifier (DID) in an stable environment where you must ensure that the data isn't volatile. This is important because you won't be able to see the seed after you created the DID. This means: When you lose your wallet/database you won't be able to use the DID anymore, unless you have a backup at hand.
+This variant explains how to generate a decentralized identifier (DID) in a stable environment where you must ensure that the data isn't volatile. This is important because you won't be able to see the seed after you created the DID. This means: When you lose your wallet/database you won't be able to use the DID anymore, unless you have a backup at hand.
 
 #### 1. Start issuer
 Because you don't set the seed, the environment variables don't need to be touched.
@@ -101,7 +101,7 @@ Note: When using Docker with WSL, your base URL for a local setup will only be a
 </details>
 
 #### 2. Generate DID
-Once the agent is started, send the following request to the wallet endpoint (e.g. Endpoint http://0.0.0.0:8000/wallet/did/create)
+Once the agent is started, send the following request to the wallet endpoint (e.g., endpoint http://0.0.0.0:8000/wallet/did/create)
 
 `POST /wallet/did/create`
 ```json
@@ -239,7 +239,7 @@ You will also be able to see your DID and Verkey on the Sandbox Ledger under htt
 <details>
 
 <summary>More to the stable environment</summary>
-Your stable environment must have ACA-py accessible from the internet. This must be configured in the environment variable ACAPY_ENDPOINT.
+Your stable environment must have ACA-Py accessible from the internet. This must be configured in the environment variable ACAPY_ENDPOINT.
 
 If you generated your DID & Verkey in an unstable environment you will have to migrate it to your stable environment. The key material is saved in your wallet in the postgres database.
 
@@ -289,7 +289,7 @@ Accept the invitation by sending the mail content to the invitation endpoint.
   ]
 }
 ```
-This connection is between the public sandbox endorser and your ACA-py.
+This connection is between the public sandbox endorser and your ACA-Py.
 
  ### 3. Specify the endorsing connection
 
@@ -317,7 +317,7 @@ To make the issuer-agent aware, that it should send the transaction to endorser,
 > * `endorser_did` is the DID of the public sandbox endorser, which is **8WzWX4G3Rti6tVSX3Atcvo**
 > * `endorser_name` must match the value of ACAPY_ENDORSER_ALIAS environment variable set in the docker compose file.
 
-> The  **endorser did** is already put in the request url and is **8WzWX4G3Rti6tVSX3Atcvo**
+> The  **endorser DID** is already put in the request URL and is **8WzWX4G3Rti6tVSX3Atcvo**
 
 
 `POST /transactions/:conn_id/set-endorser-info`?endorser_did=8WzWX4G3Rti6tVSX3Atcvo&endorser_name=foittendorser
@@ -343,7 +343,7 @@ You will get a large response. Reading back with
 
 `GET /wallet/did/public`
 
-Will return your now public did & verkey
+Will return your now public DID & Verkey
 
 ```json
     "result": {
@@ -361,7 +361,7 @@ Will return your now public did & verkey
 
 > **Before you continue**  
 > Keep in mind that the diagrams and requests in this section are strong-abstracted and only serve to give an idea of the flow.
-> For more detailed information visit the [aries-rfcs](https://github.com/hyperledger/aries-rfcs/tree/main/concepts) which explains the detailed process of the individual steps
+> For more information, visit the [aries-rfcs](https://github.com/hyperledger/aries-rfcs/tree/main/concepts) which explains the detailed process of the individual steps
 
 Now that your issuer is connected to the endorser of the FOITT, you're able to move on to issue credentials. For the sake of simplicity, this example will lack the possibility to revoke issued credentials for now. Let's imagine the following credential "MySpecialId" with some attributes:
 
@@ -379,8 +379,8 @@ Now that your issuer is connected to the endorser of the FOITT, you're able to m
 1. [Create a schema with the attributes you want to have in the credentials](#1-create-a-schema)
 2. [Create a credential definition (a unique instance of that schema which is used for issuing credentials)](#2-create-a-credential-definition)
 3. [Create an invitation for one or more holders](#3-create-an-invitation)
-4. Transmit the invitation to the holder. This could be achieved by scanning a qr-code, calling the link etc. 
-5. A connection can be accepted in an automated fashion, which means that some additional request are made in the background
+4. Transmit the invitation to the holder. This could be achieved by scanning a QR-Code, calling the link etc. 
+5. A connection can be accepted in an automated fashion, which means that some additional requests are made in the background
 6. [Issue a credential based on the credential definition.](#6-issue-and-send-a-credential)
 7. The holder has received a "MySpecialId" and can use it in a proof request
 
@@ -482,7 +482,7 @@ Copy the value of the attribute "schema_id" from the previous response and use i
 ```
 ### 3. Create an invitation
 > **Who is going to accept the invitation?**   
-> If you're stumbling at this point, asking yourself who this "different agent" could be, then it might be helpful to look the courses mentioned [at the beginning](#how-to-use-the-public-sandbox-with-your-own-agent) or setup locally [one of the demo use-cases (with alice, bob, faber college)](https://github.com/hyperledger/aries-cloudagent-python/blob/main/docs/GettingStartedAriesDev/DecentralizedIdentityDemos.md) provided by hyperledger. These show how different agents interact with each-other by using a connection
+> If you're stumbling at this point, asking yourself who this "different agent" could be, then it might be helpful to look the courses mentioned [at the beginning](#how-to-use-the-public-sandbox-with-your-own-agent) or setup locally [one of the demo use-cases (with Alice, Bob, Faber College)](https://github.com/hyperledger/aries-cloudagent-python/blob/main/docs/GettingStartedAriesDev/DecentralizedIdentityDemos.md) provided by the Hyperledger Foundation. These show how different agents interact with each-other by using a connection
  
 To send a credential to a holder, a channel / connection needs to be setup between the agents upfront. This process is initiated by creating an invitation.
 At this point you need a different/receiving agent which is going to accept the invitation.
@@ -554,8 +554,8 @@ To issue the credentials the [connection_id](#3-create-an-invitation) and [schem
 ```
 
 ### What next?
-Congrats, you arrived at the end :-) ! Not only have you established an endorsing connection with the FOITT endorser, but as well set up your own agent which whom you can issue credentials from now on. For further information on the SSI topic, feel free to have look at the courses mentioned [at the beginning](#how-to-use-the-public-sandbox-with-your-own-agent)
+Congrats, you arrived at the end :-) ! Not only have you established an endorsing connection with the FOITT endorser, but as well set up your own agent with which you can issue credentials from now on. For further information on the SSI topic, feel free to have look at the courses mentioned [at the beginning](#how-to-use-the-public-sandbox-with-your-own-agent)
 
 **Troubles?**
 
-If you consulted the documentation but still need a helping hand you're welcome to contact us by mail [ssi-sandbox@bit.admin.ch](mailto:ssi-sandbox@bit.admin.ch) 
+If you consulted the documentation but still need a helping hand, you're welcome to contact us by mail [ssi-sandbox@bit.admin.ch](mailto:ssi-sandbox@bit.admin.ch) 
