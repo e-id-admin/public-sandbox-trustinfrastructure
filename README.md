@@ -25,6 +25,12 @@ If you and your institution are interested in joining the adventure, download an
 
 - - - -
 
+## Getting started
+If you're not yet completely acquainted with our technology stack, or if you're unsure about how to create the necessary data for your
+Public Sandbox Trust Infrastructure application, we've created a [Cookbook](cookbook) for your convenience. This guide outlines the crucial steps you need
+to take to establish your setup and enable yourself to issue verifiable credentials. In addition, it includes a collection of beneficial links 
+as useful resources for understanding the technology and its associated concepts.
+
 ## Ground rules
 You will find everything about the participation and data management rules in the fact sheet and in the application form. Main rules are:
 
