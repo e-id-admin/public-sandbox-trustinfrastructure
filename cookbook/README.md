@@ -4,8 +4,11 @@
 
 This documentation will show you how to create a DID and connect your issuing agent to the endorser of the FOITT (Federal Office of Information Technology, Systems and Telecommunication)
 
-> **New to SSI?**   
-> There are several courses out there, which give you a good overview about the technology
+> **New to Self-Sovereign Identity (SSI) or the tech stack?**   
+> If you're just starting in the SSI field, the following course might help you to understand the basic concepts and building blocks
+> - edX [Getting Started with Self-Sovereign Identity](https://www.edx.org/course/getting-started-with-self-sovereign-identity)
+>
+> If you already possess a firm grasp on SSI's underlying principles, the following ressources might help you to delve into the tech stack of the Public Sandbox Trust Infrastructure
 > - GitHub [Getting started with Aries](https://github.com/hyperledger/aries-cloudagent-python/blob/main/docs/GettingStartedAriesDev/README.md)
 > - edX [Introduction to Hyperledger SSI Blockchain solutions](https://www.edx.org/course/identity-in-hyperledger-aries-indy-and-ursa)
 > - edX [Becoming a Hyperledger Aries Developer](https://www.edx.org/course/becoming-a-hyperledger-aries-developer)
