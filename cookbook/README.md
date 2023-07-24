@@ -221,7 +221,7 @@ Now that you've created your DID you can apply to access the Public Sandbox Trus
 
 </details>
 
-## After your [applied](https://github.com/e-id-admin/public-sandbox-trustinfrastructure#how-to-apply-to-the-sandbox)
+## After you [applied](https://github.com/e-id-admin/public-sandbox-trustinfrastructure#how-to-apply-to-the-sandbox)
 ### 1. Check your mail inbox
 After you applied successfully you should have received an e-mail with an invitation similar to this one
 
