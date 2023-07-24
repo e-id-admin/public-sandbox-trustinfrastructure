@@ -16,7 +16,7 @@
                 The main purpose of the information provided in this document is to get you up and running and connected to the Public Sandbox Trust Infrastructure.
                 Please be aware that exposing containers deployed using the provided Docker Compose file directly to the internet poses a serious security risk. Before using the provided Docker Compose file, minimally ensure that:
                 <ul class="alert">
-                    <li>The exemplary user accounts, passwords and API keys have been changed (basically erveything starting with "unsecure" in the Docker Compose file)</li>
+                    <li>The exemplary user accounts, passwords and API keys have been changed (basically everything starting with "unsecure" in the Docker Compose file)</li>
                     <li>The admin API endpoint is protected to only allow access from trusted sources (port 8000, according to the initial settings)</li>
                 </ul>
             </div>
