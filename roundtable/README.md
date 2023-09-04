@@ -1,0 +1,1 @@
+There are regularly roundtable meetings with all the participants from the public sandbox. The invitation is sent to the participants, the Slides with the information and Q&A will be published in this repo.
