@@ -3,7 +3,7 @@
 ## What's the Public Sandbox Trust Infrastructure?
 The "Public Sandbox Trust Infrastructure" is an isolated test area and pilot operation on the Trust Infrastructure currently being built by the Swiss Confederation to support the Swiss digital identity (E-ID) and its necessary Self-Sovereign Identity (SSI) ecosystem.
 
-In order to enable the emergence of the ecosystem, the "Public Sandbox Trust Infrastructure" is made available during app. 12 months to every public and private institution in Switzerland willing to conduct on it their own SSI-Pilots and thus experiment and learn hand in hand with the Swiss Government. The objective of this initiative is to gain experience on the potential processes and technical elements around the E-ID and the underlying trust infrastructure.
+In order to enable the emergence of the ecosystem, the "Public Sandbox Trust Infrastructure" is made available until the end of 2024, to every public and private institution in Switzerland willing to conduct on it their own SSI-Pilots and thus experiment and learn hand in hand with the Swiss Government. The objective of this initiative is to gain experience on the potential processes and technical elements around the E-ID and the underlying trust infrastructure.
 
 ![Overview](images/overview_sandbox.jpg)
 
