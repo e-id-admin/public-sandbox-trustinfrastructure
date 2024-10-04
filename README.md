@@ -1,4 +1,9 @@
 # Welcome to the Public Sandbox Trust Infrastructure
+**
+
+## Update regarding Public Beta
+In Q1 2025, the Public Sandbox Trust Infastructure will be replaced by a new integration environment (Public Beta). It will be based on the technologies that will be used for the initial productive implementation of the E-ID and its trust-infrastructure. This factsheet provides further information. Additional information will follow.
+https://backend.eid.admin.ch/fileservice/sdweb-docs-prod-eidch-files/files/2024/09/19/d6944976-2e80-4bdd-9f73-ba4e0638396e.pdf
 
 ## What's the Public Sandbox Trust Infrastructure?
 The "Public Sandbox Trust Infrastructure" is an isolated test area and pilot operation on the Trust Infrastructure currently being built by the Swiss Confederation to support the Swiss digital identity (E-ID) and its necessary Self-Sovereign Identity (SSI) ecosystem.
