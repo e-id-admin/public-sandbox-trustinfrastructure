@@ -1,7 +1,7 @@
 # Welcome to the Public Sandbox Trust Infrastructure
 
 ## Update regarding Public Beta
-In Q1 2025, the Public Sandbox Trust Infastructure will be replaced by a new integration environment (Public Beta). It will be based on the technologies that will be used for the initial productive implementation of the E-ID and its trust-infrastructure. This factsheet provides further information.
+In Q1 2025, the Public Sandbox Trust Infastructure will be replaced by a new integration environment (Public Beta). It will be based on the technologies that will be used for the initial productive implementation of the E-ID and its trust-infrastructure. This factsheet provides further information:
 
 https://backend.eid.admin.ch/fileservice/sdweb-docs-prod-eidch-files/files/2024/09/19/d6944976-2e80-4bdd-9f73-ba4e0638396e.pdf
 
